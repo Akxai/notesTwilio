@@ -1,0 +1,15 @@
+<%- include("partials/header.ejs") -%>
+<div id="form">
+
+  <form class="forms" action="/query" method="post">
+    <input type="email" id="email" name="email" class="to-change input query-common" placeholder="Email" required><br>
+    <textarea name="name" rows="5" cols="30" id="message" placeholder="Message" class="to-change input query-common" required></textarea><br>
+    <button type="submit" name="button" class="done-button query-common-text">Submit</button>
+  </form>
+</div>
+<i class="fa-solid fa-wrench modex question"></i>
+<%- include("partials/footer") -%>
+
+<script type="text/javascript">
+  document.getElementById("ECE").innerHTML = "092";
+</script>
