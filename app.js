@@ -4,12 +4,14 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const twilio = require("twilio");
+const path = require("path");
 
 dotenv.config();
 
 const app = express();
 
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "src"));
 
 app.use(express.static("public"));
 app.use(
@@ -21,7 +23,9 @@ app.use(
 const accountSid = process.env.ACCOUNTSID;
 const authToken = process.env.AUTHTOKEN;
 
-const client = new twilio(accountSid, authToken);
+const client = new twilio(accountSid, authToken, {
+  username: "akshaypaytm14@gmail.com",
+});
 
 mongoose.connect(process.env.LINK, {
   useNewUrlParser: true,
@@ -58,8 +62,8 @@ app.post("/query", function (req, res) {
   client.messages
     .create({
       body: `Email: ${req.body.email} Message: ${req.body.name}`,
-      to: process.env.ADMINNUMBER, // Text this number
-      from: process.env.FROMNUMBER, // From a valid Twilio number
+      to: process.env.TOPHONE, // Text this number
+      from: process.env.FROMPHONE, // From a valid Twilio number
     })
     .then((message) => console.log(message.sid));
   res.redirect("/");
