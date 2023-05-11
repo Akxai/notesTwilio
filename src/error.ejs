@@ -1,0 +1,66 @@
+<%- include("partials/header") -%>
+
+<h2 class="mode error-h2 font">Awww....Don't Cry.</h2>
+<h5 class="modex error-h5 font">
+  It's just a 404 Error, You didn't break the Internet.
+</h5>
+
+<form class="" action="/error" method="post">
+  <button type="submit" name="button" class="error-button">
+    <strong>Back To Home!</strong> <br />
+    else <br />
+    "Laugh with bugs, learn from bugs."
+  </button>
+</form>
+<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+<lord-icon
+  src="https://cdn.lordicon.com/jwkbctmp.json"
+  trigger="loop"
+  colors="primary:#E45826"
+  style="
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    display: flex;
+    text-align: center;
+  "
+>
+</lord-icon>
+
+<%- include("partials/footer") -%>
+
+<script type="text/javascript">
+  document.getElementById("ECE").innerHTML = "404";
+
+  const randomNumber = Math.floor(Math.random() * 900 + 1);
+  const newImg = document.createElement("img");
+  // newImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randomNumber}.png`;
+
+  const publicKey = "e5d32850971733aaaf7c2ee4a0885a7c";
+  const privateKey = "0ddd21dc6616d01142e8df9a5ddeac3f53d84740";
+  const characterId = "123"; // Replace with the specific character ID you want to fetch the image for
+
+  // Construct the URL for fetching the image
+  const timestamp = Date.now();
+  const hash = md5(timestamp + privateKey + publicKey); // Generate MD5 hash
+  const imageUrl = `https://gateway.marvel.com/v1/public/characters/${characterId}/thumbnail?apikey=${publicKey}&ts=${timestamp}&hash=${hash}`;
+
+  // Make the API request to fetch the image
+  fetch(imageUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const imageUrl =
+        data.data.results[0].thumbnail.path +
+        "." +
+        data.data.results[0].thumbnail.extension;
+      console.log(imageUrl); // Use the imageUrl as needed
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
+  newImg.src = imageUrl;
+
+  newImg.classList.add("pokemon");
+  document.querySelector("form").append(newImg);
+</script>
