@@ -9,6 +9,13 @@
 </footer>
 
 <script>
+
+const loader = document.getElementById("pre-loader");
+  window.addEventListener("load", function () {
+    loader.style.display = "none";
+  }
+  );
+
   function myFunction() {
     const elements = document.querySelectorAll(".mode");
     for (const element of elements) {
